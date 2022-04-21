@@ -3,7 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.1.32210.238
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "001-Estudo-API", "001-Estudo-API\001-Estudo-API.csproj", "{4BFB617F-F55F-48C8-8F39-DA92A77D10A6}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "001-Estudo-API", "001-Estudo-API\001-Estudo-API.csproj", "{4BFB617F-F55F-48C8-8F39-DA92A77D10A6}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "002-MyFirstBaltaAPI", "002-MyFirstBaltaAPI\002-MyFirstBaltaAPI.csproj", "{20E9BCC6-B663-4380-8B6A-31B343C7E888}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +17,10 @@ Global
 		{4BFB617F-F55F-48C8-8F39-DA92A77D10A6}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4BFB617F-F55F-48C8-8F39-DA92A77D10A6}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4BFB617F-F55F-48C8-8F39-DA92A77D10A6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{20E9BCC6-B663-4380-8B6A-31B343C7E888}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{20E9BCC6-B663-4380-8B6A-31B343C7E888}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{20E9BCC6-B663-4380-8B6A-31B343C7E888}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{20E9BCC6-B663-4380-8B6A-31B343C7E888}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

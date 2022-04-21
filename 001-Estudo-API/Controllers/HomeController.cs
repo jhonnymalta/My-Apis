@@ -2,11 +2,14 @@
 
 namespace _001_Estudo_API.Controllers
 {
-    public class HomeController : Controller
+    [ApiController]
+    public class HomeController : ControllerBase
     {
-        public IActionResult Index()
+        [HttpGet]
+        [Route("/")]
+        public string Get()
         {
-            return Ok("Parabéns vc criou sua primeira API!");
+            return "Parabéns vc criou sua primeira API!";
             
         }
        
