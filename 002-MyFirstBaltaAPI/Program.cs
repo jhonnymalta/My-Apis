@@ -1,8 +1,11 @@
+using _002_MyFirstBaltaAPI.DataContext;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 
 builder.Services.AddControllers();
+builder.Services.AddDbContext<AppDbContext>();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
@@ -26,9 +29,6 @@ app.MapGet("/{nome}", (string nome) =>
 {
    return  Results.Ok($"Hello {nome}");
 });
-app.MapPost("/", () =>
-{
 
-})
 
 app.Run();
