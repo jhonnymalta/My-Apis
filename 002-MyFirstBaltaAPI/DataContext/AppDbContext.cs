@@ -10,8 +10,6 @@ namespace _002_MyFirstBaltaAPI.DataContext
             
 
         public DbSet<ToDoModel> Todos { get; set; }
-
-
-
+        public Task Users { get; internal set; }
     }
 }

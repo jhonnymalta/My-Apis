@@ -17,6 +17,9 @@ namespace _002_MyFirstBaltaAPI.Mappings
                 .IsRequired()
                 .HasColumnType("NVarchar")
                 .HasMaxLength(128);
+            builder.Property(x => x.PasswordHash)
+                .IsRequired();
+                
 
             //indices
             builder.HasIndex(x => x.Id,"IX_User_ID")
