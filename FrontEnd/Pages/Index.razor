@@ -1,0 +1,101 @@
+﻿@page "/"
+@page "/index"
+@inject HttpClient http
+
+<div class="container">
+    <div class="row">
+        <div class="col-3">
+            <Contador quantidade="@tarefas.Count()"></Contador>  
+        </div>
+        <div class="col-3">
+            <Contador quantidade="@tarefas.Count()"></Contador>  
+        </div>
+    </div>
+
+</div>
+
+@if (tarefas == null)
+{
+    <p>Carregando..</p>
+}
+else if (!tarefas.Any())
+{
+    <p>Ainda não Existe Tarefas!</p>
+}
+else
+{
+    <table class="table">
+        <thead class="thead-dark">
+            <tr>
+                <th scope="col">Ações</th>
+                <th scope="col">Data</th>
+                <th scope="col">Descrição</th>
+                <th scope="col">Concluída</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var tarefa in tarefas)
+            {
+                <tr>
+                    <td><button @onclick="@(()=> RemoverTarefa(tarefa.Id))"><i class="oi oi-trash"></i></button></td>
+                    <td>@tarefa.DataCriacao</td>
+                    <td>@tarefa.Descricao</td>
+                    <td><input type="checkbox" @bind="tarefa.Concluida"></input></td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+}
+
+@if (tarefas != null)
+{
+    <div class="form-group">
+        <label>Tarefa</label>
+        <input type="text" placeholder="Informe a tarefa" @bind="novaTarefa"></input>
+        <button class="btn btn-outline-primary" @onclick="AdicionarNovaTarefa">Registrar Tarefa</button>
+
+    </div>
+}
+
+@code {
+
+    protected override async Task OnInitializedAsync()
+    {
+        tarefas = await http.GetFromJsonAsync<List<Tarefa>>("Data/tarefas.json");
+    }
+
+    public class Tarefa
+    {
+        public Guid Id { get; set; }
+        public string Descricao { get; set; }
+        public bool Concluida { get; set; }
+        public DateTime DataCriacao { get; set; }
+    }
+
+    private string novaTarefa = "";
+
+    private List<Tarefa> tarefas = new List<Tarefa>();
+
+    void AdicionarNovaTarefa()
+    {
+        if (!string.IsNullOrWhiteSpace(novaTarefa))
+        {
+            tarefas.Add(new Tarefa
+                {
+                    DataCriacao = DateTime.Now,
+                    Descricao = novaTarefa,
+                    Id = Guid.NewGuid()
+                });
+            novaTarefa = "";
+        }
+    }
+    private void RemoverTarefa(Guid id)
+    {
+        tarefas.Remove(tarefas.First(x => x.Id == id));
+    }
+}
+<PageTitle>Index</PageTitle>
+
+
+

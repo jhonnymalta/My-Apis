@@ -26,30 +26,30 @@ namespace _002_MyFirstBaltaAPI.Controllers
         //{
         //    return Ok(User.Identity.Name);
         //}
-        [HttpPost("v1/newuser")]
-        public async Task<IActionResult> Login(
-            [FromBody] User user,
-            [FromServices] AppDbContext constext
-            )
-        {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest("Modelo de usuário inválido");
-            }
-            var password = user.PasswordHash;
-            user.PasswordHash = PasswordHasher.Hash(password);
-            try
-            {
-                await constext.
+        //[HttpPost("v1/newuser")]
+        //public async Task<IActionResult> Login(
+        //    [FromBody] User user,
+        //    [FromServices] AppDbContext constext
+        //    )
+        //{
+        //    if (!ModelState.IsValid)
+        //    {
+        //        return BadRequest("Modelo de usuário inválido");
+        //    }
+        //    var password = user.PasswordHash;
+        //    user.PasswordHash = PasswordHasher.Hash(password);
+        //    try
+        //    {
+                
 
-            }
-            catch (expt ex)
-            catch (Exception)
-            {
+        //    }
+        //    catch (expt ex) { }
+        //    catch (Exception)
+        //    {
 
-                throw;
-            }
+        //        throw;
+        //    }
 
         }
     }
-}
+

@@ -1,0 +1,15 @@
+﻿@page "/consulta/{incremento:int}"
+@page "/consulta/{texto}"
+
+@inherits ConsultaBase
+<h3>Consulta</h3>
+<h3>Número da ADE: <strong style="font-size:2.1rem">@numAde</strong> </h3>
+<input type="text" @bind-value="numAde" @bind-value:event="oninput" ></input>
+<button class="btn btn-primary">Pesquisar</button>
+<hr/>
+<h1>@texto</h1>
+<h1>Valor: @count</h1>
+<button @onclick="contador" >Incrementar</button>
+
+
+

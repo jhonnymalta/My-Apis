@@ -1,0 +1,42 @@
+﻿@page "/novo_usuario"
+<h3>Registrar novo usuário</h3>
+<div class="row">
+    <EditForm Model="@usuario" OnValidSubmit="@Submeter" class="col-3">
+
+        <DataAnnotationsValidator />
+        <ValidationSummary/>
+        <div class="mb-2 form-group">
+            <label form="nome">Nome</label>
+            <InputText id="nome" @bind-Value="usuario.Name" class="form-control"></InputText>
+            <ValidationMessage For="()=>usuario.Name"></ValidationMessage>
+        </div>
+        <div class="mb-2 form-group">
+            <label form="email">Email</label>
+            <InputText id="email" @bind-Value="usuario.Email" class="form-control"></InputText>
+             <ValidationMessage For="()=>usuario.Email"></ValidationMessage>
+        </div>
+        <div class="mb-2 form-group">
+            <label form="idade">Idade</label>
+            <InputNumber id="idade" @bind-Value="usuario.Idade" class="form-control"></InputNumber>
+             <ValidationMessage For="()=>usuario.Idade"></ValidationMessage>
+        </div>
+        <input type="submit" value="Enviar" class="btn btn-primary" />
+    </EditForm>
+
+</div>
+
+
+
+
+@code {
+    Usuario usuario = new Usuario { };
+
+
+    private void Submeter()
+    {
+        Console.WriteLine($"nome:{usuario.Name}- Email:{usuario.Email}- Idade:{usuario.Idade}");
+    }
+
+   
+
+}
