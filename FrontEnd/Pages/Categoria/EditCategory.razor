@@ -1,0 +1,45 @@
+﻿@page "/categoria/edit/{categoriaid:int}"
+
+@inject HttpClient http
+@inject  NavigationManager navigation
+
+
+<h3>Editar Categoria</h3>
+<EditForm Model="@categoria" OnValidSubmit="@EditarCategoria">
+    <DataAnnotationsValidator/>
+    <ValidationSummary/>
+    <div class="mb-2 form-group">
+        <label form ="nome">Nome</label>
+        <InputText @bind-Value=@categoria.Name class="form-control"></InputText>
+        <ValidationMessage For="@(()=>categoria.Name)"></ValidationMessage>
+    </div>
+    <div class="mb-2 form-group">
+        <label form ="descricao">Descricao</label>
+        <InputText @bind-Value=@categoria.ShortDescription class="form-control"></InputText>
+        <ValidationMessage For="@(()=>categoria.ShortDescription)"></ValidationMessage>
+    </div>
+    <button type="submit"   class="btn btn-success">Salvar</button>
+   
+
+</EditForm>
+
+
+@code {
+    [Parameter]
+    public int categoriaid { get; set; }
+
+    Categoria categoria = new Categoria();
+
+    protected async override Task OnParametersSetAsync()
+    {
+        categoria = await http.GetFromJsonAsync<Categoria>($"https://localhost:7082/categoria/{categoriaid}");
+    }
+
+    async Task EditarCategoria()
+    {
+        await http.PutAsJsonAsync($"https://localhost:7082/categoria/{categoria.CategoryId}",categoria);
+        navigation.NavigateTo("/categoria");
+       
+    }
+
+}

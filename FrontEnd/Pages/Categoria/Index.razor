@@ -1,0 +1,72 @@
+﻿@page "/categoria"
+
+@inject HttpClient http
+
+
+
+<h3>Index</h3>
+<a class="btn btn-primary" href="/categoria/createcategory" >Criar Nova Categoria</a>
+ 
+@if (categorias == null)
+{
+    <p><em>Carregando..</em></p>
+}else if(categorias.Length == 0)
+{
+    <p><em>Ainda não existem categorias cadastradas</em></p>
+}
+else
+{
+    <table class="table">
+  <thead>
+    <tr>
+      <th scope="col">Categoria</th>
+      <th scope="col">Descrição</th>
+      <th scope="col">Editar</th>
+      <th scope="col">Deletar</th>
+    </tr>
+  </thead>
+  <tbody>
+   @foreach (var categoria in categorias)
+  {
+      <tr>
+          <td>@categoria.Name</td>
+          <td>@categoria.ShortDescription</td>
+          <td><a class="btn btn-primary" href="categoria/edit/@categoria.CategoryId">Editar</a></td>
+          <td><a class="btn btn-danger" @onclick="(()=>DeletarCategoria(categoria.CategoryId))"  >Deletar</a></td>
+          
+      </tr>
+  }
+  </tbody>
+</table>
+}
+
+
+
+
+@code {
+    [Parameter]
+    public int categoriaId { get; set; }
+
+
+    Categoria[] categorias{ get; set; }
+
+    protected override async Task OnInitializedAsync()
+    {
+        await CarregaCategorias();
+       
+    }
+    async Task CarregaCategorias()
+    {
+        categorias = await http.GetFromJsonAsync<Categoria[]>("https://localhost:7082/categoria");
+         InvokeAsync(() =>  StateHasChanged());
+    }
+
+
+
+    async void DeletarCategoria(int categoriaId)
+    {
+        await http.DeleteAsync($"https://localhost:7082/categoria/{categoriaId}");
+        CarregaCategorias();
+    }
+
+}
