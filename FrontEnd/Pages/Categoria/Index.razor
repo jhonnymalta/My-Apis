@@ -10,7 +10,7 @@
 @if (categorias == null)
 {
     <p><em>Carregando..</em></p>
-}else if(categorias.Length == 0)
+}else if(categorias.Count == 0)
 {
     <p><em>Ainda não existem categorias cadastradas</em></p>
 }
@@ -26,7 +26,7 @@ else
     </tr>
   </thead>
   <tbody>
-   @foreach (var categoria in categorias)
+   @foreach (var categoria in categorias.categoria)
   {
       <tr>
           <td>@categoria.Name</td>
@@ -38,6 +38,7 @@ else
   }
   </tbody>
 </table>
+<Pagination count="@categorias.Count" page="categorias.Page" ></Pagination>
 }
 
 
@@ -47,8 +48,12 @@ else
     [Parameter]
     public int categoriaId { get; set; }
 
+    [Parameter]
+    public int page { get; set; } = 2;
 
-    Categoria[] categorias{ get; set; }
+
+
+    PaginationResultViewModel categorias{ get; set; }
 
     protected override async Task OnInitializedAsync()
     {
@@ -57,9 +62,10 @@ else
     }
     async Task CarregaCategorias()
     {
-        categorias = await http.GetFromJsonAsync<Categoria[]>("https://localhost:7082/categoria");
+        categorias = await http.GetFromJsonAsync<PaginationResultViewModel>("https://localhost:7082/categoria");
          InvokeAsync(() =>  StateHasChanged());
     }
+   
 
 
 

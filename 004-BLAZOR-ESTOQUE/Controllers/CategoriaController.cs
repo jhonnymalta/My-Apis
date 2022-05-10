@@ -13,11 +13,26 @@ namespace _004_BLAZOR_ESTOQUE.Controllers
     {
         [HttpGet("/categoria")]
 
-        public async Task<ActionResult<List<Categoria>>> GetAsync(
-            [FromServices] AppDbContext context
+        public async Task<ActionResult<PaginationResultViewModel>> GetAsync(
+            [FromServices] AppDbContext context,
+            [FromQuery] int page = 0,
+            [FromQuery] int pageSize = 3
             )
         {
-            return await context.Categorias.AsNoTracking().ToListAsync();
+            var count = await context.Categorias.CountAsync();
+            var categorias = await context.Categorias.AsNoTracking().Skip(page * pageSize).Take(pageSize).ToListAsync();
+
+            return Ok(new PaginationResultViewModel {
+            Count = count,
+            Page = page,
+            PageSize = pageSize,
+            categoria = categorias
+            
+            });
+            Console.WriteLine(page);
+               
+
+            
         }
 
 
