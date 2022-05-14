@@ -1,6 +1,7 @@
 ﻿using _003_ControleDeEstoque.Data;
 using _003_ControleDeEstoque.Models;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace _003_ControleDeEstoque.Controllers
 {
@@ -12,6 +13,14 @@ namespace _003_ControleDeEstoque.Controllers
         {
             return "Enabled";
         }
+        [HttpGet("v1/product")]
+        public async Task<IActionResult> GetAll(
+            [FromServices] AppDbContext context
+            )
+        {
+            var Produtos = await context.produtos.ToListAsync();
+            return Ok(Produtos);
+        }    
         [HttpPost("v1/product")]
         public ActionResult<Produto> Post(
             [FromBody] Produto produto,
